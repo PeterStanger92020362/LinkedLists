@@ -5,6 +5,7 @@
  */
 package linkedlists;
 
+import static java.lang.Character.toLowerCase;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -49,17 +50,46 @@ public class LinkedLists {
         System.out.println("A program to find if an entered\n"
                 + "String is a Palindrome.");
         System.out.println("Please enter a String");
-        input = userInput.next();
+        input = userInput.nextLine();
         
         System.out.println("\nEntered string is " + input.length() + " characters long.");
         
         LinkedList isPalindrome = new LinkedList();
         
         for (var i=0; i < input.length(); i++){
-            isPalindrome.add(input.charAt(i));
-        }
+            if ( input.charAt(i) != ' ' ){
+                isPalindrome.add( toLowerCase( input.charAt(i) ) );
+            }
+        };
         
         System.out.println(isPalindrome);
+        
+        LinkedList isPalindromeReversed = new LinkedList();
+        
+        ListIterator iterator = isPalindrome.listIterator(isPalindrome.size());
+        
+        while(iterator.hasPrevious()){
+            isPalindromeReversed.add(iterator.previous());
+        };
+        
+        System.out.println(isPalindromeReversed);
+        
+        // compare both linked lists
+        
+        boolean isPal = false;
+               
+        for (var i = 0; i < isPalindrome.size(); i++){
+            if (isPalindrome.get(i) == isPalindromeReversed.get(i)){
+                isPal = true;
+            } else {
+                isPal = false;
+                break;
+            }
+        }
+        
+        
+        System.out.println("\nPalindrome?: " + isPal);
+        
         
     }
     
